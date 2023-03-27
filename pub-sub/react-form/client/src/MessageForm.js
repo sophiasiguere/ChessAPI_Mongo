@@ -12,6 +12,7 @@
 //
 
 import React from 'react';
+import lzbase62 from 'lzbase62';
 
 export class MessageForm extends React.Component {
     constructor(props) {
@@ -32,6 +33,7 @@ export class MessageForm extends React.Component {
     }
 
     handleSubmit = (event) => {
+      this.state.message = lzbase62.compress(this.state.message);
         fetch('/publish', {
             headers: {
                 'Accept': 'application/json',
@@ -46,7 +48,7 @@ export class MessageForm extends React.Component {
 
     getInitialState = () => {
       return {
-        messageType: "A",
+        messageType: "Comprimir",
         message: ""
       };
     }
@@ -58,9 +60,7 @@ export class MessageForm extends React.Component {
         <div className="form-group">
           <label>Select Message Type</label>
           <select className="custom-select custom-select-lg mb-3" name="messageType" onChange={this.handleInputChange} value={this.state.messageType}>
-            <option value="A">A</option>
-            <option value="B">B</option>
-            <option value="C">C</option>
+            <option value="Comprimir">Comprimir</option>
           </select>
         </div>
         <div className="form-group">
