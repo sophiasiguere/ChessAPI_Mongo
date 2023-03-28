@@ -42,6 +42,15 @@ export class MessageForm extends React.Component {
             method:"POST",
             body: JSON.stringify(this.state),
         });
+        this.state.messageType = "Resultado";
+        fetch('/publish', {
+          headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json'
+          },
+          method:"POST",
+          body: JSON.stringify(this.state),
+      });
         event.preventDefault();
         this.setState(this.getInitialState());
     }
